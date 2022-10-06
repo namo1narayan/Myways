@@ -1,92 +1,59 @@
-import React from "react";
-import "./App.css";
-import { forecast } from "./Weatherdata";
-// import { Container,Row,Button,Col } from 'react-bootstrap';
-
-export const Weather = () => {
-  return (
-    <>
-      <HomePageHeader />
-      <div className="weather-container">
-        {forecast.map((data, key) => {
-          return (
-            <div key={key}>
-              <Weathers
-                key={key}
-                code={data.code}
-                date={data.date}
-                day={data.day}
-                high={data.high}
-                low={data.low}
-                text={data.text}
-              />
-            </div>
-          );
-        })}
-      </div>
-    </>
-  );
-};
-
-const HomePageHeader = () => {
-  return (
-    <header className="header">
-      <h2>New York City,NY,United State</h2>
-    </header>
-  );
-};
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
 
-const Weathers = ({ code,date,day,high,low,text }) => {
-    if (!code) return <div />;
+const useStyles = makeStyles((theme) => ({
+    main : {
+        overflow: 'auto',
+        padding: 5,
+    },
+    text__left: {
+        float: 'left',
+    },
+    text__right: {
+        float: 'right',
+    },
+    span: {
+        fontWeight: 'bold',
+    }
+
+  }));
+
+
+  const HomePageHeader = () => {
+    const classes = useStyles();
     return (
-        <table>
-        <tbody>
-          <tr>
-            {/* <td>
-              <h5>{code}</h5>
-            </td> */}
-            <td>
-              <h5>{date}</h5>
-            </td>
-            <td>
-              <h4>{day}</h4>
-            </td>
-            <td>
-              <p>{high}</p>
-            </td>
-            <td>
-              <p>{low}</p>
-            </td>
-            <td>
-              <p>{text}</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+      <header className="header2">
+        <h2>New York City,NY,United States</h2>
+      <div className={classes.main}>
+      <div className={classes.text__left}  >
+          <Typography variant="h3" gutterBottom >
+              21°C
+          </Typography>
+          <Typography variant="h5" gutterBottom >
+              Clear
+          </Typography>
+          <Typography variant="h6" gutterBottom >
+             Day 30°C  Night 20°C
+          </Typography>
+          </div>
+      </div>
+      </header>
       
     );
+  };
 
+function Weather({weather}) {
+    return (
+        <CardContent>
+            <HomePageHeader/>
+            
+            </CardContent>    
+
+            
+    );
 };
 
-// function Weathers() {
-//     return (
-//         <Container>
-//         <Container>
-//           <h1 >
-//             21<br></br>  <strong className="white">Clear </strong>
-//           </h1>
-//           <p style={{ color: "white" }}>
-//             Day30  .Night20
-//           </p>
-//       </Container>
-//       <Button variant="primary"  target="_blank">
-//         </Button>
-//     </Container>
-     
-    
-//   );
-// }
-  
-  export default Weather;
+export default Weather;
